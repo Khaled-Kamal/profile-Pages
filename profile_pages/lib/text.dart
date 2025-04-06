@@ -1,205 +1,171 @@
 import 'package:flutter/material.dart';
 
-class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({super.key});
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AuthScreen(),
+    );
+  }
+}
+
+class AuthScreen extends StatefulWidget {
+  @override
+  _AuthScreenState createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            // Handle back button press
-          },
-        ),
-        title: const Text(
-          "Edit Profile",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        child: Column(
-          children: [
-            // Profile Picture
-            Stack(
-              alignment: Alignment.bottomRight,
+      body: Stack(
+        children: [
+          Container(
+            // decoration: BoxDecoration(
+            //   // image: DecorationImage(
+            //   //   image: AssetImage('assets/background.jpg'), // تأكد من إضافة صورة النجوم إلى assets
+            //   //   fit: BoxFit.cover,
+            //   // ),
+            // ),
+          ),
+          SafeArea(
+            child: Column(
               children: [
-                CircleAvatar(
-                  radius: 80,
-                  backgroundColor: Colors.grey[300],
-                  // backgroundImage: NetworkImage(
-                  //   'https://via.placeholder.com/150', // Placeholder image
-                  // ),
+                SizedBox(height: 20),
+                // Image.asset('assets/logo.png', height: 50), // تأكد من إضافة شعار مناسب إلى assets
+                SizedBox(height: 10),
+                Text(
+                  'Get Started now',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
+                Text(
+                  'Create an account or log in to explore our app',
+                  style: TextStyle(color: Colors.white70),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                Expanded(
                   child: Container(
+                    padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: const Color(0xFF1565C0),
-                      border: Border.all(color: Colors.white, width: 2),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
                     ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 18,
-                      ),
-                      onPressed: () {
-                        // Handle profile picture change
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 48),
-
-            // First Name and Last Name Row
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: "First name",
-                      labelStyle: const TextStyle(color: Colors.grey),
-                      filled: true,
-                      fillColor: Colors.grey[100],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    controller: TextEditingController(text: "Kholid"),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Last name",
-                      labelStyle: const TextStyle(color: Colors.grey),
-                      filled: true,
-                      fillColor: Colors.grey[100],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    controller: TextEditingController(text: "Ghonem"),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            // Email Field
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Email",
-                labelStyle: const TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.grey[100],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              controller: TextEditingController(text: "Kholid.ghonem@gmail.com"),
-            ),
-            const SizedBox(height: 16),
-
-            // Phone Number Field (Modified as per the image)
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Phone',
-                style: TextStyle(fontSize: 16, color: Colors.black),
-              ),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              decoration: InputDecoration(
-                labelStyle: const TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.grey[100],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-                prefixIcon: const Padding(
-                  padding: EdgeInsets.only(left: 12.0, right: 8.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "+20",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      ),
-                      SizedBox(width: 8),
-                      Icon(Icons.arrow_drop_down, color: Colors.grey),
-                    ],
-                  ),
-                ),
-              ),
-              controller: TextEditingController(text: "1118769790"), // Corrected phone number
-              keyboardType: TextInputType.phone, // Numeric keyboard
-            ),
-            const SizedBox(height: 30),
-
-            // Cancel and Save Buttons
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      // Handle cancel action
-                    },
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.red, width: 2),
-                      foregroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    child: const Text(
-                      "Cancel",
-                      style: TextStyle(fontSize: 16, color: Colors.red),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Handle save action
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1565C0),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    child: const Text(
-                      "Save",
-                      style: TextStyle(fontSize: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () => setState(() => isLogin = true),
+                              child: Text(
+                                'Log In',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: isLogin ? Colors.blue : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            GestureDetector(
+                              onTap: () => setState(() => isLogin = false),
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: !isLogin ? Colors.blue : Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        if (!isLogin)
+                          _buildTextField('Name', Icons.person),
+                        _buildTextField('Email', Icons.email),
+                        _buildTextField('Password', Icons.lock, obscureText: true),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            backgroundColor: Colors.blue.shade700,
+                          ),
+                          onPressed: () {},
+                          child: Text(
+                            isLogin ? 'Log In' : 'Create Account',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Center(child: Text('Or', style: TextStyle(color: Colors.grey))),
+                        SizedBox(height: 10),
+                        _buildSocialButton('Continue with Google', Icons.g_mobiledata),
+                        SizedBox(height: 10),
+                        _buildSocialButton('Continue with Apple', Icons.apple),
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField(String label, IconData icon, {bool obscureText = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(icon, color: Colors.blue.shade700),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.blue.shade700),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.blue.shade900),
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSocialButton(String text, IconData icon) {
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        minimumSize: Size(double.infinity, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: Colors.grey.shade300),
+        ),
+      ),
+      onPressed: () {},
+      icon: Icon(icon, size: 24),
+      label: Text(text, style: TextStyle(fontSize: 16)),
     );
   }
 }
